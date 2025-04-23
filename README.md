@@ -1,7 +1,5 @@
 # HiSem-RAG
 
-Hierarchical Semantic Retrieval-Augmented Generation system for power engineering question answering.
-
 ## Installation
 
 1. Clone the repository:
