@@ -1,0 +1,45 @@
+# HiSem-RAG 配置文件 / HiSem-RAG Configuration File
+
+# 路径配置 / Path Configuration
+paths:
+  base_path: "res/1"
+  questions_dir: "EleQA"
+  processed_docs_dir: "EleQA/documents"
+  logs_dir: "logs"
+  results_dir: "res"
+
+# 模型配置 / Model Configuration
+models:
+  local:
+    api_key: "not empty"
+    base_url: "your embedding model url"
+    embedding_model: "bge-m3"
+  zhipu:
+    api_key: "your zhipu ai key"
+    base_url: "https://open.bigmodel.cn/api/paas/v4/"
+    model_name: "glm-4-flash"
+  # 当前使用的模型选择 / Currently active LLM selection
+  active_llm: "zhipu"
+
+# 检索算法参数 / Retrieval Algorithm Parameters
+retrieval:
+  # 阈值计算参数 / Threshold Calculation Parameters
+  beta: 0.9  # 基础保留系数：控制阈值与最大相似度的关系 / Base retention coefficient: controls the relationship between threshold and maximum similarity
+  gamma: 0.8  # 分布敏感系数：控制对变异系数的响应程度 / Distribution sensitivity coefficient: controls the response degree to coefficient of variation
+  # 安全机制参数 / Safety Mechanism Parameters
+  k_min: 1  # 最低节点保留数量：确保每层至少保留的节点数 / Minimum node retention count: ensures minimum number of nodes retained per layer
+  k_max: 7  # 最大节点保留上限：限制每层最多保留的节点数 / Maximum node retention limit: limits maximum number of nodes retained per layer
+  theta_min: 0.3  # 相似度绝对阈值：设置最低相似度要求 / Absolute similarity threshold: sets minimum similarity requirement
+  # 检索深度控制 / Retrieval Depth Control
+  max_depth: 5  # 最大检索深度 / Maximum retrieval depth
+  max_results: 15  # 最大返回结果数 / Maximum number of returned results
+
+# 系统参数 / System Parameters
+system:
+  threads: 30  # 处理文档的线程数 / Number of threads for document processing
+  eval_threads: 30  # 评估线程数 / Number of evaluation threads
+  log_level: "INFO"  # 日志级别 / Logging level
+  experiment_name: "experiment"  # 实验名称 / Experiment name
+  excluded_question_ids:  # 排除的问题ID列表 raptor 无法构建这两个文档的树形结构，因此排除 / List of excluded question IDs, raptor cannot build tree structures for these documents
+    - "77980"
+    - "64056"
